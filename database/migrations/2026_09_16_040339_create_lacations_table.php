@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('lacations_', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('map_url');
+            $table->string('status');
             $table->timestamps();
+
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lacations_');
+        Schema::dropIfExists('lacations');
     }
 };

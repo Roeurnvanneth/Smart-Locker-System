@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Smart Locker System')</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom scrollbar for sidebar */
@@ -53,10 +54,8 @@
         <div class="flex-1 flex flex-col">
             <!-- Mobile Header -->
             <header class="lg:hidden bg-[#1E3A8A] text-white p-4 flex items-center justify-between">
-                <button id="sidebar-toggle" class="p-2 hover:bg-[#2d4aa0] rounded">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <button id="sidebar-toggle" type="button" class="rounded p-2 hover:bg-[#2d4aa0]" aria-label="Open navigation" aria-expanded="false">
+                    <i class="fa-solid fa-bars w-6 h-6" aria-hidden="true"></i>
                 </button>
                 <h1 class="text-lg font-semibold">Smart Locker System</h1>
                 <div class="w-10"></div>
@@ -71,6 +70,31 @@
 
     <!-- Mobile Sidebar Overlay -->
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+        const closeSidebar = () => {
+            sidebar?.classList.add('-translate-x-full');
+            sidebarOverlay?.classList.add('hidden');
+            sidebarToggle?.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('sidebar-open');
+        };
+
+        const openSidebar = () => {
+            sidebar?.classList.remove('-translate-x-full');
+            sidebarOverlay?.classList.remove('hidden');
+            sidebarToggle?.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('sidebar-open');
+        };
+
+        sidebarToggle?.addEventListener('click', openSidebar);
+        sidebarClose?.addEventListener('click', closeSidebar);
+        sidebarOverlay?.addEventListener('click', closeSidebar);
+    </script>
 
     @stack('scripts')
 </body>

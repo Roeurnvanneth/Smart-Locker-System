@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('lockers', function (Blueprint $table) {
             $table->id();
+            $table->string('location_id');
+            $table->string('locker_number');
+            $table->string('locker_code');
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -3,8 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="max-w-7xl mx-auto">
-    <h1>Dashboard</h1>
-</div>
+    <h1 class="bg-red-500 text-[20px] ">Dashboard</h1>
 @endsection
 
