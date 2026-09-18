@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('maintenances', function (Blueprint $table) {
             $table->id();
+            $table->string('locker_id');
+            $table->string('reported_by');
+            $table->string('issue');
+            $table->string('status');
+            $table->date('reported_at');
+            $table->date('resolved_at')->nullable();
             $table->timestamps();
+
         });
     }
 
