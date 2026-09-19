@@ -1,21 +1,25 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\LockerController;
-use App\Http\Controllers\MaintenanceController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::redirect('/', '/login');
+
+// Guest only
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+
+    Route::get('/register', [RegisterController::class, 'show'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+
+    // Placeholder (ជំនួសពេលធ្វើ page ពិត)
+    Route::get('/forgot-password', fn () => 'Forgot password page coming soon')->name('password.request');
 });
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
-Route::get('/lockers', [LockerController::class, 'index'])->name('lockers.index');
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('maintenance.index');
-
-
+// Logged in only
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+});
