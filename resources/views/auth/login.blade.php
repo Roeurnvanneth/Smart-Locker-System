@@ -32,7 +32,7 @@
             align-items: center;
         }
 
-        .logo { width: 190px; height: auto; margin-bottom: 4px; }
+        .logo { width: 200px; height: auto; margin-bottom: 4px; }
         .title { margin: 0; font-size: 22px; font-weight: 600; color: #0f172a; }
         .subtitle { margin: 8px 0 44px; font-size: 13px; color: #1e293b; text-align: center; }
 
@@ -93,7 +93,7 @@
 </head>
 <body>
     <main class="screen">
-        <img class="logo" src="{{ asset('images/smart-locker-logo.png') }}" alt="Smart Locker System">
+        <img src="{{ asset('assets/images/logo.png') }}" alt="Smart Locker Logo" class="logo">
 
         <h1 class="title">Welcome back</h1>
         <p class="subtitle">Log in to manage your smart lockers</p>
